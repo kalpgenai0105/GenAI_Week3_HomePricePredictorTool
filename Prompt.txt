@@ -1,0 +1,30 @@
+Use the dataset: california_housing_train.csv, Generate a code that reads input dataset to read randomly 60 to 70 rows and generate a prompt with few examples 
+
+Then use the generate prompt, call the Gemini.3.5.flash model to predict the home price for new house with user attributes.
+
+---------------------
+
+Write a complete, runnable Python script that uses few-shot prompting with Gemini to predict California house prices. The script must do two things in order:
+
+Build a few-shot prompt from the dataset. Read california_housing_train.csv with pandas and randomly sample between 60 and 70 rows (choose the exact count randomly within that range on each run). Format those rows as worked examples inside a prompt, each showing the input attributes and the actual median_house_value. The columns in this dataset are: longitude, latitude, housing_median_age, total_rooms, total_bedrooms, population, households, median_income, median_house_value. End the prompt with a clear instruction to predict the price for a new house, leaving its attributes as a placeholder to be filled at prediction time.
+
+Call the Gemini model to predict the price for a new house. Use the generated few-shot prompt and call the model named gemini-3.5-flash through the official Google Gemini Python SDK (google-genai). Take the new house's attributes from the user (via input() prompts for each attribute, with a simple way to fall back to sensible example values), insert them into the prompt, send it to the model, and print the predicted home price.
+
+Requirements:
+
+Keep the API key out of the source code: read it from the GEMINI_API_KEY environment variable and raise a clear error if it is missing.
+Make the model name a single constant at the top of the script so it is easy to change if gemini-3.5-flash is unavailable to my account.
+Structure the code into small functions (loading and sampling the data, building the prompt, collecting user attributes, calling Gemini, parsing the result) with a main() entry point.
+Instruct the model in the prompt to respond with only a numeric price, and parse that number robustly from the response (strip currency symbols and commas) so the script prints a clean value, handling the case where no number is returned.
+Add basic error handling for a missing CSV file and for failed API calls.
+Make sampling reproducible by exposing an optional random seed parameter, while defaulting to a truly random sample.
+Deliver the full script in a single code block, followed by a brief note on installing dependencies (pip install pandas google-genai) and how to run it. Do not add features beyond what is described here.
+write detailed comments in the python script.
+
+
+
+# Linux / macOS
+export GEMINI_API_KEY="your-key-here"
+
+# Windows PowerShell
+$env:GEMINI_API_KEY = ""
